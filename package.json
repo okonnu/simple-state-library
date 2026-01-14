@@ -1,0 +1,41 @@
+{
+  "name": "simple-state-library",
+  "version": "1.0.0",
+  "description": "Build web UIs using plain JavaScript classes as reactive, persistent models. Zero state management concepts - if you know JavaScript, you already know how to use it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "example": "open example.html",
+    "test:browser": "open test.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okonnu/simple-state-library.git"
+  },
+  "keywords": [
+    "state-management",
+    "reactive",
+    "model",
+    "proxy",
+    "persistence",
+    "sessionstorage",
+    "dom-binding",
+    "api-integration",
+    "javascript",
+    "vanilla-js"
+  ],
+  "author": "Okonu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okonnu/simple-state-library/issues"
+  },
+  "homepage": "https://github.com/okonnu/simple-state-library#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
+}
