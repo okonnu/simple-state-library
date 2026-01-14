@@ -31,16 +31,15 @@ declare class Model {
      * 
      * @param instanceName - The name to register this model with (for DOM bindings)
      *                       This is used as the identifier in data-bind and data-model attributes
-     * @param sessionPersist - Whether to persist to sessionStorage (default: true)
      * 
      * @example
      * const user = new User("user");
      * // Now you can use: <input data-model="user.name">
      * 
-     * // Disable persistence:
-     * const tempUser = new User("tempUser", false);
+     * // State is automatically persisted to sessionStorage
+     * // and restored when the page reloads
      */
-    constructor(instanceName: string, sessionPersist?: boolean);
+    constructor(instanceName: string);
 
     /**
      * Optional API endpoint for get() and post() methods

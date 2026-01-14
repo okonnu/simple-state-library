@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimpleStateLibrary - Example</title>
+    <link rel="stylesheet" href="example.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple State Library</h1>
+      <p class="subtitle">
+        Reactive, persistent state management with plain JavaScript
+      </p>
+
+      <div class="info-box">
+        <h3>ℹ️ How it works</h3>
+        <p>
+          Edit the fields below and watch the state update automatically. Your
+          changes are saved to sessionStorage. Try refreshing the page!
+        </p>
+      </div>
+
+      <!-- User Form Section -->
+      <div class="section">
+        <div class="section-title">User Profile</div>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            data-model="user.name"
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            data-model="user.email"
+            placeholder="user@example.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" data-model="user.role">
+            <option value="viewer">Viewer</option>
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
+        <div class="info-box">
+          <h3>📊 Current State</h3>
+          <p>
+            Name: <span class="display-value" data-bind="user.name">—</span>
+          </p>
+          <p>
+            Email: <span class="display-value" data-bind="user.email">—</span>
+          </p>
+          <p>
+            Role: <span class="display-value" data-bind="user.role">—</span>
+          </p>
+          <p style="margin-top: 10px; color: #999; font-size: 12px">
+            Full Info:
+            <span class="display-value" data-bind="user.fullName">—</span>
+          </p>
+        </div>
+
+        <div class="button-group">
+          <button class="btn-primary" id="loadBtn">📥 Load from API</button>
+          <button class="btn-primary" id="saveBtn">📤 Save to API</button>
+          <button class="btn-secondary" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="status-message" id="statusMessage"></div>
+      </div>
+
+      <!-- Second Model Section -->
+      <div class="section">
+        <div class="section-title">Settings</div>
+
+        <div class="form-group">
+          <label for="theme">Theme</label>
+          <select id="theme" data-model="settings.theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="notifications">Enable Notifications</label>
+          <input
+            type="checkbox"
+            id="notifications"
+            data-model="settings.notifications"
+          />
+        </div>
+
+        <div class="info-box">
+          <h3>📋 Settings State</h3>
+          <p>
+            Theme:
+            <span class="display-value" data-bind="settings.theme">—</span>
+          </p>
+          <p>
+            Notifications:
+            <span class="display-value" data-bind="settings.notifications"
+              >—</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include the library -->
+    <script src="../index.js"></script>
+    <!-- Include the app -->
+    <script type="module" src="example.js"></script>
+  </body>
+</html>

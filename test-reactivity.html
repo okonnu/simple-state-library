@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SimpleStateLibrary - Reactivity Test</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      .test {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .pass {
+        background: #d4edda;
+        color: #155724;
+      }
+      .fail {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SimpleStateLibrary - Reactivity Test</h1>
+
+    <div id="tests"></div>
+
+    <script src="index.js"></script>
+    <script type="module">
+      import { user, settings } from "./models.js";
+
+      const testsDiv = document.getElementById("tests");
+
+      function test(name, fn) {
+        try {
+          fn();
+          const el = document.createElement("div");
+          el.className = "test pass";
+          el.textContent = "✓ " + name;
+          testsDiv.appendChild(el);
+          return true;
+        } catch (e) {
+          const el = document.createElement("div");
+          el.className = "test fail";
+          el.textContent = "✗ " + name + ": " + e.message;
+          testsDiv.appendChild(el);
+          return false;
+        }
+      }
+
+      // Test 1: Model exists
+      test("Models are created", () => {
+        if (!user) throw new Error("user model not created");
+        if (!settings) throw new Error("settings model not created");
+      });
+
+      // Test 2: Properties work
+      test("Properties can be set", () => {
+        user.name = "Test User";
+        if (user.name !== "Test User") throw new Error("Property not set");
+      });
+
+      // Test 3: Methods work
+      test("Methods work", () => {
+        user.name = "John";
+        user.email = "john@example.com";
+        const result = user.fullName();
+        if (result !== "John (john@example.com)")
+          throw new Error("Method returned: " + result);
+      });
+
+      // Test 4: SessionStorage persistence
+      test("SessionStorage persists data", () => {
+        user.name = "Persisted";
+        const stored = JSON.parse(sessionStorage.getItem("model:user"));
+        if (!stored || stored.name !== "Persisted")
+          throw new Error("Not persisted");
+      });
+
+      // Test 5: Data binding works
+      test("DOM bindings are set up", () => {
+        const bindings = document.querySelectorAll("[data-bind], [data-model]");
+        if (bindings.length === 0) throw new Error("No bindings found in DOM");
+      });
+    </script>
+
+    <!-- Test HTML elements -->
+    <div
+      style="margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px"
+    >
+      <h2>Manual Test</h2>
+      <p>Try editing below - the "Current Value" should update in real-time:</p>
+
+      <input
+        id="testInput"
+        data-model="user.name"
+        placeholder="Type something..."
+        style="width: 300px; padding: 10px; font-size: 16px"
+      />
+      <p>Current Value: <span data-bind="user.name">—</span></p>
+
+      <p>Full Name: <span data-bind="user.fullName">—</span></p>
+    </div>
+  </body>
+</html>
